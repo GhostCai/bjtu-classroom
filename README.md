@@ -13,8 +13,7 @@ export sessionid=你的csrftoken
 python 1.fetch-data.py
 ```
 
-之后运行后端
-
+得到`data.json`后，运行后端
 ```
 python 2.app.py
 ```
