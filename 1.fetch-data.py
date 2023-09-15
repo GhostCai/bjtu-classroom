@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
                             # /html/body/div[2]/div[2]/div/div[2]/table/tr[3]/td[2]
                             # /html/body/div[2]/div[2]/div/div[2]/table/tr[3]/td[2]/@style
-                            status_path = f"/html/body/div[2]/div[2]/div/div[2]/table/tr[3]/td[{day*7+peroid+2}]/@style"
+                            status_path = f"/html/body/div[2]/div[2]/div/div[2]/table/tr[{classroom+3}]/td[{day*7+peroid+2}]/@style"
                             color = html.xpath(status_path)[0]
                             status = color2status(color)
 
@@ -94,8 +94,8 @@ if __name__ == "__main__":
                                 "classroom": classroom_name,
                                 "capacity": classroom_capacity,
                                 "week": week + 1,
-                                "day": day,
-                                "time": peroid,
+                                "day": day + 1,
+                                "time": peroid + 1,
                                 "status": status,
                             }
                             if item not in results:
@@ -105,8 +105,16 @@ if __name__ == "__main__":
                 if succ == False:
                     break
 
-            time.sleep(random.randint(0, 100) / 1000)
+            # time.sleep(random.randint(0, 100) / 1000)
 
     # save to json file
     with open("data.json", "w") as f:
         json.dump(results, f)
+        
+    # save to csv file
+    with open("data.csv", "w") as f:
+        f.write("building,classroom,capacity,week,day,time,status\n")
+        for item in results:
+            f.write(
+                f"{item['building']},{item['classroom']},{item['capacity']},{item['week']},{item['day']},{item['time']},{item['status']}\n"
+            )
