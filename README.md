@@ -17,3 +17,5 @@ python 1.fetch-data.py
 ```
 python 2.app.py
 ```
+
+然后可以通过形如`/classroom/<string:building>/<int:week>/<int:day>/<string:start>/<string:end>`的接口查询教室
